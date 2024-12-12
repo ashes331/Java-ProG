@@ -1,0 +1,62 @@
+로또 랜덤 번호 생성기----------------------------------------------------------
+package Pack_1;
+
+import java.util.Random;
+
+public class InputData {
+	public int[] generateLottoNumbers() {
+        int[] lottoNumbers = new int[6];
+        Random random = new Random();
+
+        for (int i = 0; i < lottoNumbers.length; i++) {
+            while (true) {
+                int number = random.nextInt(45) + 1; // 1~45 범위
+                boolean isDuplicate = false;
+
+                // 중복 확인
+                for (int j = 0; j < i; j++) {
+                    if (lottoNumbers[j] == number) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                // 중복이 아니면 배열에 추가하고 반복 종료
+                if (!isDuplicate) {
+                    lottoNumbers[i] = number;
+                    break;
+                }
+            }
+        }
+        return lottoNumbers;
+    }
+}
+
+로또 번호 출력-------------------------------------------------------------------
+package Play;
+
+import java.util.Arrays;
+import Pack_1.InputData;
+
+public class Play {
+
+	public static void main(String[] args) {
+		InputData inputData = new InputData();
+        int[] lottoNumbers = inputData.generateLottoNumbers();
+
+        // 로또 번호 오름차순 정렬
+        Arrays.sort(lottoNumbers);
+
+        // 로또 번호 출력
+        System.out.print("생성된 로또 번호: ");
+        for (int number : lottoNumbers) {
+            System.out.print(number + " ");
+        }
+    }
+}
+
+
+
+
+
+
